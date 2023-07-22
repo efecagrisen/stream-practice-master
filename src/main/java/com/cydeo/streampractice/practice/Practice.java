@@ -37,48 +37,48 @@ public class Practice {
     // Above services have all the required methods.
     // Also, you can check all the methods in the ServiceImpl classes inside the service.impl package, they all have explanations.
 
-    // Display all the employees
+    //1 Display all the employees
     public static List<Employee> getAllEmployees() {
         return employeeService.readAll();
     }
 
-    // Display all the countries
+    //2 Display all the countries
     public static List<Country> getAllCountries() {
         //TODO Implement the method
         return countryService.readAll();
     }
 
-    // Display all the departments
+    //3 Display all the departments
     public static List<Department> getAllDepartments() {
         //TODO Implement the method
         return departmentService.readAll();
     }
 
-    // Display all the jobs
+    //4 Display all the jobs
     public static List<Job> getAllJobs() {
         //TODO Implement the method
         return jobService.readAll();
     }
 
-    // Display all the locations
+    //5 Display all the locations
     public static List<Location> getAllLocations() {
         //TODO Implement the method
         return locationService.readAll();
     }
 
-    // Display all the regions
+    //6 Display all the regions
     public static List<Region> getAllRegions() {
         //TODO Implement the method
         return regionService.readAll();
     }
 
-    // Display all the job histories
+    //7 Display all the job histories
     public static List<JobHistory> getAllJobHistories() {
         //TODO Implement the method
         return jobHistoryService.readAll();
     }
 
-    // Display all the employees' first names
+    //8 Display all the employees' first names
     public static List<String> getAllEmployeesFirstName() {
         //TODO Implement the method
         return getAllEmployees().stream()
@@ -86,7 +86,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display all the countries' names
+    //9 Display all the countries' names
     public static List<String> getAllCountryNames() {
         //TODO Implement the method
         return countryService.readAll().stream()
@@ -94,7 +94,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display all the departments' managers' first names
+    //10 Display all the departments' managers' first names
     public static List<String> getAllDepartmentManagerFirstNames() {
         //TODO Implement the method
         return departmentService.readAll().stream()
@@ -102,7 +102,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display all the departments where manager name of the department is 'Steven'
+    //11 Display all the departments where manager name of the department is 'Steven'
     public static List<Department> getAllDepartmentsWhichManagerFirstNameIsSteven() {
         //TODO Implement the method
 
@@ -111,7 +111,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display all the departments where postal code of the location of the department is '98199'
+    //12 Display all the departments where postal code of the location of the department is '98199'
     public static List<Department> getAllDepartmentsWhereLocationPostalCodeIs98199() {
         //TODO Implement the method
         return departmentService.readAll().stream()
@@ -119,7 +119,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display the region of the IT department
+    //13 Display the region of the IT department
     public static Region getRegionOfITDepartment() throws Exception {
         //TODO Implement the method
         List<Region> regionList = departmentService.readAll().stream()
@@ -129,7 +129,7 @@ public class Practice {
         return regionList.get(0);
     }
 
-    // Display all the departments where the region of department is 'Europe'
+    //14 Display all the departments where the region of department is 'Europe'
     public static List<Department> getAllDepartmentsWhereRegionOfCountryIsEurope() {
         //TODO Implement the method
         return departmentService.readAll().stream()
@@ -137,7 +137,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display if there is any employee with salary less than 1000. If there is none, the method should return true
+    //15 Display if there is any employee with salary less than 1000. If there is none, the method should return true
     public static boolean checkIfThereIsNoSalaryLessThan1000() {
         //TODO Implement the method
         return employeeService.readAll().stream()
@@ -145,7 +145,7 @@ public class Practice {
                 .noneMatch(p->p.getSalary()<1000);
     }
 
-    // Check if the salaries of all the employees in IT department are greater than 2000 (departmentName: IT)
+    //16 Check if the salaries of all the employees in IT department are greater than 2000 (departmentName: IT)
     public static boolean checkIfThereIsAnySalaryGreaterThan2000InITDepartment() {
         //TODO Implement the method
         return employeeService.readAll().stream()
@@ -153,7 +153,7 @@ public class Practice {
                 .anyMatch(p->p.getSalary()>2000);
     }
 
-    // Display all the employees whose salary is less than 5000
+    //17 Display all the employees whose salary is less than 5000
     public static List<Employee> getAllEmployeesWithLessSalaryThan5000() {
         //TODO Implement the method
         return employeeService.readAll().stream()
@@ -161,7 +161,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display all the employees whose salary is between 6000 and 7000
+    //18 Display all the employees whose salary is between 6000 and 7000
     public static List<Employee> getAllEmployeesSalaryBetween() {
         //TODO Implement the method
         return employeeService.readAll().stream()
@@ -169,7 +169,7 @@ public class Practice {
                 .collect(Collectors.toList());
     }
 
-    // Display the salary of the employee Grant Douglas (lastName: Grant, firstName: Douglas)
+    //19 Display the salary of the employee Grant Douglas (lastName: Grant, firstName: Douglas)
     public static Long getGrantDouglasSalary() throws Exception {
         //TODO Implement the method
         return employeeService.readAll().stream()
@@ -177,34 +177,48 @@ public class Practice {
                 .findFirst().get();
     }
 
-    // Display the maximum salary an employee gets
+    //20 Display the maximum salary an employee gets
     public static Long getMaxSalary() throws Exception {
         return employeeService.readAll().stream()
                 .max(Comparator.comparing(p->p.getSalary())).get().getSalary();
     }
 
-    // Display the employee(s) who gets the maximum salary
+    //21 Display the employee(s) who gets the maximum salary
     public static List<Employee> getMaxSalaryEmployee() {
         //TODO Implement the method
-        return new ArrayList<>();
+        return employeeService.readAll().stream()
+                .filter(p-> {
+                    try {
+                        return p.getSalary().equals(getMaxSalary());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
-    // Display the max salary employee's job
+    //22 Display the max salary employee's job
     public static Job getMaxSalaryEmployeeJob() throws Exception {
         //TODO Implement the method
-        return new Job();
+        return employeeService.readAll().stream()
+                .max(Comparator.comparing(p->p.getSalary())).get().getJob();
     }
 
-    // Display the max salary in Americas Region
+    //23 Display the max salary in Americas Region
     public static Long getMaxSalaryInAmericasRegion() throws Exception {
         //TODO Implement the method
-        return 1L;
+        return employeeService.readAll().stream()
+                .filter(p->p.getDepartment().getLocation().getCountry()
+                .getRegion().getRegionName().equalsIgnoreCase("americas"))
+                .max(Comparator.comparing(p->p.getSalary())).get().getSalary();
     }
 
-    // Display the second maximum salary an employee gets
+    //24 Display the second maximum salary an employee gets
     public static Long getSecondMaxSalary() throws Exception {
         //TODO Implement the method
-        return 1L;
+        return employeeService.readAll().stream()
+                .sorted().collect(Collectors.toList()).get(1).getSalary();
+
     }
 
     // Display the employee(s) who gets the second maximum salary
