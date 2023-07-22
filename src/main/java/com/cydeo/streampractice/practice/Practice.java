@@ -143,31 +143,41 @@ public class Practice {
     // Display if there is any employee with salary less than 1000. If there is none, the method should return true
     public static boolean checkIfThereIsNoSalaryLessThan1000() {
         //TODO Implement the method
-        return false;
+        return employeeService.readAll().stream()
+                .filter(p->p.getDepartment().getDepartmentName().equalsIgnoreCase("IT"))
+                .noneMatch(p->p.getSalary()<1000);
     }
 
     // Check if the salaries of all the employees in IT department are greater than 2000 (departmentName: IT)
     public static boolean checkIfThereIsAnySalaryGreaterThan2000InITDepartment() {
         //TODO Implement the method
-        return false;
+        return employeeService.readAll().stream()
+                .filter(p->p.getDepartment().getDepartmentName().equalsIgnoreCase("IT"))
+                .anyMatch(p->p.getSalary()>2000);
     }
 
     // Display all the employees whose salary is less than 5000
     public static List<Employee> getAllEmployeesWithLessSalaryThan5000() {
         //TODO Implement the method
-        return new ArrayList<>();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary()<5000)
+                .collect(Collectors.toList());
     }
 
     // Display all the employees whose salary is between 6000 and 7000
     public static List<Employee> getAllEmployeesSalaryBetween() {
         //TODO Implement the method
-        return new ArrayList<>();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary()>6000 && p.getSalary()<7000)
+                .collect(Collectors.toList());
     }
 
     // Display the salary of the employee Grant Douglas (lastName: Grant, firstName: Douglas)
     public static Long getGrantDouglasSalary() throws Exception {
         //TODO Implement the method
-        return 1L;
+        return employeeService.readAll().stream()
+                .filter(p->p.getFirstName().equalsIgnoreCase("douglas") && p.getLastName().equalsIgnoreCase("grant")).map(p->p.getSalary())
+                .findFirst().get();
     }
 
     // Display the maximum salary an employee gets
