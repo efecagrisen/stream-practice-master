@@ -216,96 +216,140 @@ public class Practice {
     //24 Display the second maximum salary an employee gets
     public static Long getSecondMaxSalary() throws Exception {
         //TODO Implement the method
+        Long maxSalary = getMaxSalary();
         return employeeService.readAll().stream()
-                .sorted().collect(Collectors.toList()).get(1).getSalary();
+               .filter(p->p.getSalary() < maxSalary)
+                .collect(Collectors.toList()).get(0).getSalary();
+
 
     }
 
-    // Display the employee(s) who gets the second maximum salary
-    public static List<Employee> getSecondMaxSalaryEmployee() {
+    //25 Display the employee(s) who gets the second maximum salary
+    public static List<Employee> getSecondMaxSalaryEmployee() throws Exception {
         //TODO Implement the method
-        return new ArrayList<>();
+        Long maxSalary = getMaxSalary();
+        Long secondMaxSalary = employeeService.readAll().stream()
+                .filter(p->p.getSalary() < maxSalary).collect(Collectors.toList()).get(0).getSalary();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary().equals(secondMaxSalary))
+                .collect(Collectors.toList());
     }
 
-    // Display the minimum salary an employee gets
+    //26 Display the minimum salary an employee gets
     public static Long getMinSalary() throws Exception {
         //TODO Implement the method
-        return 1L;
+        return employeeService.readAll().stream()
+                .min(Comparator.comparing(p->p.getSalary())).get().getSalary();
+
     }
 
-    // Display the employee(s) who gets the minimum salary
-    public static List<Employee> getMinSalaryEmployee() {
+    //27 Display the employee(s) who gets the minimum salary
+    public static List<Employee> getMinSalaryEmployee() throws Exception {
         //TODO Implement the method
-        return new ArrayList<>();
+        Long minSalary = getMinSalary();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary().equals(minSalary))
+                        .collect(Collectors.toList());
     }
 
-    // Display the second minimum salary an employee gets
+    //28 Display the second minimum salary an employee gets
     public static Long getSecondMinSalary() throws Exception {
         //TODO Implement the method
-        return 1L;
+        Long minSalary = getMinSalary();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary()>minSalary)
+                .mapToLong(Employee::getSalary)
+                .min().getAsLong();
     }
 
-    // Display the employee(s) who gets the second minimum salary
-    public static List<Employee> getSecondMinSalaryEmployee() {
+    //29 Display the employee(s) who gets the second minimum salary
+    public static List<Employee> getSecondMinSalaryEmployee() throws Exception {
         //TODO Implement the method
-        return new ArrayList<>();
+        Long minSalary = getMinSalary();
+        Long secondMinSalary = employeeService.readAll().stream()
+                .filter(p->p.getSalary()>minSalary)
+                .mapToLong(Employee::getSalary)
+                .min().getAsLong();
+
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary().equals(secondMinSalary))
+                .collect(Collectors.toList());
     }
 
-    // Display the average salary of the employees
+    //30 Display the average salary of the employees
     public static Double getAverageSalary() {
         //TODO Implement the method
-        return 1d;
+        Double averageSalary = employeeService.readAll().stream()
+                .collect(Collectors.averagingDouble(Employee::getSalary));
+        return averageSalary;
     }
 
-    // Display all the employees who are making more than average salary
+    //31 Display all the employees who are making more than average salary
     public static List<Employee> getAllEmployeesAboveAverage() {
         //TODO Implement the method
-        return new ArrayList<>();
+        Double averageSalary = getAverageSalary();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary()>averageSalary)
+                .collect(Collectors.toList());
+
     }
 
-    // Display all the employees who are making less than average salary
+    //32 Display all the employees who are making less than average salary
     public static List<Employee> getAllEmployeesBelowAverage() {
         //TODO Implement the method
-        return new ArrayList<>();
+        Double averageSalary = getAverageSalary();
+        return employeeService.readAll().stream()
+                .filter(p->p.getSalary()<averageSalary)
+                .collect(Collectors.toList());
     }
 
-    // Display all the employees separated based on their department id number
+    //33 Display all the employees separated based on their department id number
     public static Map<Long, List<Employee>> getAllEmployeesForEachDepartment() {
         //TODO Implement the method
-        return new HashMap<>();
+        Map<Long,List<Employee>> employeesByDepartments = employeeService.readAll().stream()
+                .collect(Collectors.groupingBy(p->p.getDepartment().getId()));
+        return employeesByDepartments;
+
     }
 
-    // Display the total number of the departments
+    //34 Display the total number of the departments
     public static Long getTotalDepartmentsNumber() {
         //TODO Implement the method
-        return 1L;
+        return departmentService.readAll().stream()
+                .count();
     }
 
-    // Display the employee whose first name is 'Alyssa' and manager's first name is 'Eleni' and department name is 'Sales'
+    //35 Display the employee whose first name is 'Alyssa' and manager's first name is 'Eleni' and department name is 'Sales'
     public static Employee getEmployeeWhoseFirstNameIsAlyssaAndManagersFirstNameIsEleniAndDepartmentNameIsSales() throws Exception {
         //TODO Implement the method
-        return new Employee();
+        return employeeService.readAll().stream()
+                .filter(p->p.getDepartment().getDepartmentName().equalsIgnoreCase("sales"))
+                .filter(p->p.getManager().getFirstName().equalsIgnoreCase("eleni"))
+                .filter(p->p.getFirstName().equalsIgnoreCase("alyssa"))
+                .findFirst().get();
+
+
     }
 
-    // Display all the job histories in ascending order by start date
+    //36 Display all the job histories in ascending order by start date
     public static List<JobHistory> getAllJobHistoriesInAscendingOrder() {
         //TODO Implement the method
         return new ArrayList<>();
     }
 
-    // Display all the job histories in descending order by start date
+    //37 Display all the job histories in descending order by start date
     public static List<JobHistory> getAllJobHistoriesInDescendingOrder() {
         //TODO Implement the method
         return new ArrayList<>();
     }
 
-    // Display all the job histories where the start date is after 01.01.2005
+    //38 Display all the job histories where the start date is after 01.01.2005
     public static List<JobHistory> getAllJobHistoriesStartDateAfterFirstDayOfJanuary2005() {
         //TODO Implement the method
         return new ArrayList<>();
     }
 
-    // Display all the job histories where the end date is 31.12.2007 and the job title of job is 'Programmer'
+    //39 Display all the job histories where the end date is 31.12.2007 and the job title of job is 'Programmer'
     public static List<JobHistory> getAllJobHistoriesEndDateIsLastDayOfDecember2007AndJobTitleIsProgrammer() {
         //TODO Implement the method
         return new ArrayList<>();

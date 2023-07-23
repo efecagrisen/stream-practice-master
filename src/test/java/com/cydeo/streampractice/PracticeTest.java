@@ -270,7 +270,7 @@ public class PracticeTest {
     }
 
     @Test
-    public void shouldGetMinSalaryEmployee(){
+    public void shouldGetMinSalaryEmployee() throws Exception {
         List<Employee> employees = Practice.getMinSalaryEmployee();
         long actualSalary = 2100;
         Assert.assertEquals(1, employees.size());
@@ -284,7 +284,7 @@ public class PracticeTest {
     }
 
     @Test
-    public void shouldGetSecondMinSalaryEmployee(){
+    public void shouldGetSecondMinSalaryEmployee() throws Exception {
         List<Employee> employees = Practice.getSecondMinSalaryEmployee();
         long actualSalary = 2200;
         Assert.assertEquals(2, employees.size());
@@ -299,21 +299,21 @@ public class PracticeTest {
         Assert.assertEquals(expectedAverageSalary, averageSalary, DELTA);
     }
 
-    @Test
+    @Test //31
     public void shouldGetAllEmployeesAboveAverage(){
         List<Employee> employeeList = Practice.getAllEmployeesAboveAverage();
         int expectedEmployeeCount = 51;
         Assert.assertEquals(expectedEmployeeCount, employeeList.size());
     }
 
-    @Test
+    @Test //32
     public void shouldGetAllEmployeesBelowAverage(){
         List<Employee> employeeList = Practice.getAllEmployeesBelowAverage();
         int expectedEmployeeCount = 56;
         Assert.assertEquals(expectedEmployeeCount, employeeList.size());
     }
 
-    @Test
+    @Test //33
     public void shouldGetAllEmployeesForEachDepartment() {
         Map<Long, List<Employee>> map = Practice.getAllEmployeesForEachDepartment();
         Assert.assertEquals(35L, map.get(80L).size());
@@ -321,14 +321,14 @@ public class PracticeTest {
         Assert.assertEquals(5L, map.get(60L).size());
     }
 
-    @Test
+    @Test //34
     public void shouldGetTotalDepartmentsNumber(){
         long totalDepartmentsNumber = Practice.getTotalDepartmentsNumber();
         long expectedValue =27;
         Assert.assertEquals(expectedValue, totalDepartmentsNumber);
     }
 
-    @Test
+    @Test //35
     public void shouldGetEmployeeWhoseFirstNameIsAlyssaAndManagersFirstNameIsEleniAndDepartmentNameIsSales() throws Exception {
         Employee employee = Practice.getEmployeeWhoseFirstNameIsAlyssaAndManagersFirstNameIsEleniAndDepartmentNameIsSales();
         Assert.assertEquals(175L, employee.getId().longValue());
@@ -336,7 +336,7 @@ public class PracticeTest {
         Assert.assertEquals("Hutton", employee.getLastName());
     }
 
-    @Test
+    @Test //36
     public void shouldGetAllJobHistoriesInAscendingOrder(){
         List<JobHistory> jobHistoryList = Practice.getAllJobHistoriesInAscendingOrder();
         int expectedValue = 10;
