@@ -170,7 +170,7 @@ public class PracticeTest {
         Assert.assertEquals("98199", departmentList.get(0).getLocation().getPostalCode());
     }
 
-    @Test
+    @Test //13
     public void shouldGetRegionOfITDepartment() throws Exception {
         Region region = Practice.getRegionOfITDepartment();
         Assert.assertEquals("Americas", region.getRegionName());
@@ -178,20 +178,20 @@ public class PracticeTest {
         Assert.assertEquals(expectedValue, region.getId().longValue());
     }
 
-    @Test
+    @Test//14
     public void shouldGetAllDepartmentsWhereRegionOfCountryIsEurope() {
         List<Department> departmentList = Practice.getAllDepartmentsWhereRegionOfCountryIsEurope();
         Assert.assertEquals(3, departmentList.size());
         Assert.assertEquals("Europe", departmentList.get(0).getLocation().getCountry().getRegion().getRegionName());
     }
 
-    @Test
+    @Test//15
     public void shouldAllEmployeeSalaryGreaterThan1000() {
         boolean actualValue = Practice.checkIfThereIsNoSalaryLessThan1000();
         Assert.assertTrue(actualValue);
     }
 
-    @Test
+    @Test//16
     public void shouldAllEmployeeSalaryGreaterThan2000InITDepartment() {
         boolean actualValue = Practice.checkIfThereIsAnySalaryGreaterThan2000InITDepartment();
         Assert.assertTrue(actualValue);
